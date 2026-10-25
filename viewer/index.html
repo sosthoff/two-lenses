@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two Lenses · Loop</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='12' cy='16' r='9' fill='%23f5b544' fill-opacity='.9'/><circle cx='20' cy='16' r='9' fill='%2338d4c4' fill-opacity='.8'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <nav class="top">
+    <a class="brand" href="/viewer/"><span class="logo"><i></i><i></i></span>Two Lenses <span class="sub">Loop</span></a>
+    <div class="spacer"></div>
+    <a class="btn ghost" href="/launch/">+ New</a>
+    <label class="select"><select id="runs"></select></label>
+    <a class="btn primary" id="open" target="_blank">Watch explainer <span>↗</span></a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow" id="meta"></div>
+        <h1 id="event"></h1>
+        <div class="versus" id="versus"></div>
+      </div>
+      <div class="status-wrap">
+        <span class="status" id="status"></span>
+      </div>
+    </section>
+
+    <section class="panel stepper" id="stepper"></section>
+
+    <section class="panel errorbox" id="error" hidden></section>
+
+    <section class="panel discovery" id="discovery" hidden></section>
+
+    <section class="panel progress" id="progress"></section>
+
+    <section class="iters" id="iters"></section>
+
+    <p class="empty" id="empty" hidden>No runs yet. Start one with <code>npm run loop</code>.</p>
+  </main>
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>

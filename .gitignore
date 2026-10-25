@@ -1,0 +1,8 @@
+samples/**/*.mp4
+samples/**/*.info.json
+samples/**/*.vtt
+node_modules/
+.env
+out/
+.DS_Store
+samples/web-*/

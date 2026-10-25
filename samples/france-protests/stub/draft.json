@@ -1,0 +1,55 @@
+{
+  "moments": [
+    {
+      "id": "opening",
+      "title": "First words",
+      "takeaway": "Both open on clashes. Watch which word each picks for the people in the street.",
+      "segments": {
+        "fox": { "start": 0, "end": 9, "quote": "rioters are throwing objects at police", "technique": "Labeling", "note": "Opens by calling participants 'rioters' before any context on who is marching or why." },
+        "nbc": { "start": 0, "end": 13, "quote": "biggest, most violent crisis in years", "technique": "Escalation framing", "note": "Opens on 'most violent crisis in years': violence first, the cause only 13 seconds later." }
+      }
+    },
+    {
+      "id": "cause",
+      "title": "What is this about?",
+      "takeaway": "Same unrest, two different causes. Neither lets a protester explain why they are there.",
+      "segments": {
+        "fox": { "start": 117, "end": 145, "quote": "mass migration has been a huge part", "technique": "Unsourced causal claim", "note": "The guest attributes the violence to 'second, third generation migrants' and mass migration, but no data, arrest statistics, or sourcing of any kind is offered on screen to support this sweeping claim about who rioted." },
+        "nbc": { "start": 13, "end": 22, "quote": "nationwide movement against the high cost of living", "technique": "Cause stated by reporter", "note": "Names a cause (cost of living, gas prices) in the anchor's voice; no protester explains it themselves." }
+      }
+    },
+    {
+      "id": "voices",
+      "title": "Who explains it?",
+      "takeaway": "Who gets to explain the story shapes what it means.",
+      "segments": {
+        "fox": { "start": 65, "end": 74, "quote": "working together with the Islamists", "technique": "Single partisan voice", "note": "Only voice is a US think-tank analyst; groups named 'communist… Islamists' with no evidence shown." },
+        "nbc": { "start": 43, "end": 60, "quote": "deployed 70,000 police", "technique": "Official sources", "note": "Reporter on the ground, but figures and framing come from French authorities and police orders." }
+      }
+    },
+    {
+      "id": "scale",
+      "title": "How bad was it?",
+      "takeaway": "Same day, same 400,000 people: 'peaceful and large' vs 'venomous rage'.",
+      "segments": {
+        "fox": { "start": 160, "end": 175, "quote": "civilized values in France", "technique": "Catastrophizing", "note": "Describes protesters as 'filled with hatred, venomous rage' and the 'collapse of civilized values'." },
+        "nbc": { "start": 69, "end": 92, "quote": "for the most part peaceful and large", "technique": "Context with numbers", "note": "Compares to last weekend; gives police (400k) and union (2x) counts: two sources for one number." }
+      }
+    },
+    {
+      "id": "home",
+      "title": "Why should Americans care?",
+      "takeaway": "Both bring the story home: one as a threat, one as a sports update.",
+      "segments": {
+        "fox": { "start": 105, "end": 119, "quote": "big warning", "technique": "Domestication", "note": "Turns French unrest into a warning about the US 'far left'." },
+        "nbc": { "start": 107, "end": 129, "quote": "tomorrow's NFL game", "technique": "none", "note": "Live update from the Paris correspondent." }
+      }
+    }
+  ],
+  "questions": [
+    "Who is quoted, and who is only talked about?",
+    "What cause does each report give, and what evidence backs it?",
+    "What number would you need to judge 'violent' vs 'peaceful'?",
+    "What would you only know if you watched both?"
+  ]
+}

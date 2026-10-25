@@ -1,0 +1,8 @@
+{
+  "event": "France protests, Oct 24 2026",
+  "goal": "Help a viewer who only saw one outlet notice how framing differs: labels, stated causes, who gets to speak, and how scale is described. Every claim must be grounded in what is said or shown at that timestamp, and every outlet gets the same level of scrutiny.",
+  "sources": [
+    { "id": "fox", "label": "Fox News", "file": "samples/france-protests/fox_see-it-violent.mp4" },
+    { "id": "nbc", "label": "NBC News", "file": "samples/france-protests/nbc_protests-expand.mp4" }
+  ]
+}
