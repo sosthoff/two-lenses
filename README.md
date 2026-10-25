@@ -11,9 +11,9 @@ Paste one news video. See how other outlets covered the same event, side by side
 ![Playwright](https://img.shields.io/badge/Playwright-Chrome-2EAD33?logo=playwright&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)
 
-[![Two Lenses explainer: Fox News and NBC News on the same day of French protests](docs/explainer.png)](https://github.com/sosthoff/two-lenses/raw/main/docs/demo.mp4)
+[![Two Lenses explainer: Fox News and NBC News on the same day of French protests](docs/explainer.png)](https://cdn.jsdelivr.net/gh/sosthoff/two-lenses@main/docs/demo.mp4)
 
-**[▶ Watch the 1-minute demo](https://github.com/sosthoff/two-lenses/raw/main/docs/demo.mp4)**
+**[▶ Watch the 1-minute demo](https://cdn.jsdelivr.net/gh/sosthoff/two-lenses@main/docs/demo.mp4)**
 
 </div>
 
