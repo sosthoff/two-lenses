@@ -8,7 +8,8 @@ import { chromium } from 'playwright';
 export async function record({ baseUrl, lensUrl, outDir, maxSeg }) {
   const browser = await chromium.launch({
     channel: 'chrome',
-    args: ['--autoplay-policy=no-user-gesture-required'],
+    // /dev/shm is tiny in containers.
+    args: ['--autoplay-policy=no-user-gesture-required', '--disable-dev-shm-usage'],
   });
   const size = { width: 1280, height: 720 };
   const context = await browser.newContext({ viewport: size, recordVideo: { dir: outDir, size } });

@@ -13,7 +13,7 @@ Paste one news video. See how other outlets covered the same event, side by side
 
 [![Two Lenses explainer: Fox News and NBC News on the same day of French protests](docs/explainer.png)](https://cdn.jsdelivr.net/gh/sosthoff/two-lenses@main/docs/demo.mp4)
 
-**[▶ Watch the 1-minute demo](https://cdn.jsdelivr.net/gh/sosthoff/two-lenses@main/docs/demo.mp4)**
+**[▶ Watch the 1-minute demo](https://cdn.jsdelivr.net/gh/sosthoff/two-lenses@main/docs/demo.mp4)** · **[Try the live showcase](https://two-lenses.wajohack.workers.dev)**
 
 </div>
 
@@ -107,6 +107,11 @@ node src/loop.js --url "https://youtu.be/<id>"                # any video: disco
 node src/loop.js samples/france-protests/set.json --maxSeg 6  # quick preview clips
 node scripts/demo-video.mjs                                   # re-record the demo video
 ```
+
+### Deploy
+
+- **Full app (Docker):** the `Dockerfile` bundles Node, Google Chrome, ffmpeg and yt-dlp and serves on port 7860. Pass `GEMINI_API_KEY` as a secret. One analysis runs at a time.
+- **Read-only showcase (Cloudflare):** `node scripts/export-static.mjs <runId…> --featured <runId>` exports finished runs to `dist/`, then `npx wrangler deploy`. A small Worker (`cloudflare/worker.js`) adds the Range support video seeking needs.
 
 ## Project layout
 

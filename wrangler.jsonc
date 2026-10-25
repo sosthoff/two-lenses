@@ -1,0 +1,12 @@
+// Read-only showcase on Cloudflare: static assets, plus a small Worker that adds Range support for videos.
+// Build with `node scripts/export-static.mjs <runIds…> --featured <runId>`, then `npx wrangler deploy`.
+{
+  "name": "two-lenses",
+  "compatibility_date": "2026-10-12",
+  "main": "cloudflare/worker.js",
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/samples/*", "/out/*"]
+  }
+}

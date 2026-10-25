@@ -2,7 +2,20 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-const [lib, runs] = await Promise.all([fetch('/api/library').then((r) => r.json()), fetch('/api/runs').then((r) => r.json())]);
+const [lib, runs, config] = await Promise.all([
+  fetch('/api/library').then((r) => r.json()),
+  fetch('/api/runs').then((r) => r.json()),
+  fetch('/api/config').then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+]);
+const youtubeId = (s) => /(?:v=|youtu\.be\/|shorts\/|embed\/|^)([\w-]{11})(?:[&?#/]|$)/.exec(String(s).trim())?.[1];
+
+// Read-only showcase (static hosting): no live runs, sample links open a finished run.
+if (config.readonly) {
+  $('go').firstChild.textContent = 'See the analysis ';
+  document.querySelector('.toggle').hidden = true;
+  $('err').classList.add('note');
+  $('err').innerHTML = `Showcase of finished runs. Live analysis of any link runs locally with your own Gemini key: <a href="${config.repo}">${config.repo.replace('https://', '')}</a>`;
+}
 
 // Curated clips first: they run end to end offline.
 const clips = lib.flatMap((set) => set.clips).sort((a, b) => b.curated - a.curated);
@@ -39,6 +52,12 @@ if (runs.length) {
 
 $('form').onsubmit = async (e) => {
   e.preventDefault();
+  if (config.readonly) {
+    const id = youtubeId($('url').value);
+    if (clips.some((c) => c.id === id)) location.href = `/viewer/?run=${config.featuredRun}`;
+    else $('err').innerHTML = `This showcase only has the bundled sample. To analyze any link, run it locally: <a href="${config.repo}">${config.repo.replace('https://', '')}</a>`;
+    return;
+  }
   $('err').textContent = '';
   $('go').disabled = true;
   $('go').firstChild.textContent = 'Starting… ';
@@ -49,6 +68,12 @@ $('form').onsubmit = async (e) => {
       body: JSON.stringify({ url: $('url').value.trim(), quick: $('quick').checked }),
     });
     const body = await res.json();
+    if (res.status === 409 && body.id) {
+      $('err').innerHTML = `${body.error} <a href="/viewer/?run=${body.id}">Watch the current run →</a>`;
+      $('go').disabled = false;
+      $('go').firstChild.textContent = 'Find other coverage ';
+      return;
+    }
     if (!res.ok) throw new Error(body.error);
     location.href = `/viewer/?run=${body.id}`;
   } catch (err) {

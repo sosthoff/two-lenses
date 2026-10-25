@@ -23,15 +23,21 @@ const readBody = (req) =>
     req.on('end', () => resolve(data ? JSON.parse(data) : {}));
   });
 
+// One run at a time: it protects the model's rate limit and a small (shared) CPU.
+let active = null;
+
 // Start a loop run in the background; the viewer follows it through run.json.
 function startRun({ url, quick }) {
   const id = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  active = id;
   const dir = path.join(OUT, id);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'run.json'), JSON.stringify({ id, input: url, event: url, model: '…', status: 'starting', iterations: [] }));
   const logFd = fs.openSync(path.join(dir, 'loop.log'), 'a');
   const args = ['src/loop.js', '--url', url, '--run-id', id, ...(quick ? ['--maxSeg', '6'] : [])];
-  spawn(process.execPath, args, { cwd: ROOT, env: process.env, stdio: ['ignore', logFd, logFd], detached: true }).unref();
+  const child = spawn(process.execPath, args, { cwd: ROOT, env: process.env, stdio: ['ignore', logFd, logFd], detached: true });
+  child.on('exit', () => active === id && (active = null));
+  child.unref();
   return id;
 }
 
@@ -60,10 +66,13 @@ async function handler(req, res) {
   if (url.pathname === '/api/runs' && req.method === 'POST') {
     const body = await readBody(req).catch(() => ({}));
     if (!body.url?.trim()) return json(res, 400, { error: 'Paste a video link' });
+    if (active) return json(res, 409, { error: 'Another analysis is running. Watch it, or try again in a few minutes.', id: active });
     return json(res, 200, { id: startRun({ url: body.url.trim(), quick: body.quick }) });
   }
   if (url.pathname === '/api/runs') return json(res, 200, listRuns());
   if (url.pathname === '/api/library') return json(res, 200, library());
+  // The static showcase export serves { readonly: true } here instead.
+  if (url.pathname === '/api/config') return json(res, 200, { readonly: false });
   if (url.pathname === '/') {
     res.writeHead(302, { location: '/launch/' });
     return res.end();
@@ -95,7 +104,7 @@ async function handler(req, res) {
 export function startServer(port = 0) {
   return new Promise((resolve) => {
     const server = http.createServer(handler);
-    server.listen(port, '127.0.0.1', () => {
+    server.listen(port, process.env.HOST || '127.0.0.1', () => {
       const url = `http://127.0.0.1:${server.address().port}`;
       resolve({ server, url });
     });

@@ -34,6 +34,8 @@
 .toggle input:checked + span { background: color-mix(in srgb, var(--lens-1) 35%, transparent); }
 .toggle input:checked + span::after { transform: translateX(12px); background: var(--ink); }
 .err { color: var(--bad); font-size: 13px; }
+.err.note { color: var(--ink-3); }
+.err a { color: var(--ink-2); }
 
 .samples, .recent { display: grid; gap: 14px; }
 .sample-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
