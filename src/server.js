@@ -114,5 +114,7 @@ export function startServer(port = 0) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { url } = await startServer(Number(process.env.PORT) || 4317);
   console.log(`Two Lenses at ${url}  (runs viewer: ${url}/viewer/)`);
-  console.log(`Model: ${process.env.GEMINI_API_KEY ? process.env.GEMINI_MODEL || 'gemini-4-argon' : 'stub (no GEMINI_API_KEY in .env)'}`);
+  // Same choice as loop.js: MODEL_PROVIDER wins, else Gemini when a key is set.
+  const provider = process.env.MODEL_PROVIDER || (process.env.GEMINI_API_KEY ? 'gemini' : 'stub');
+  console.log(`Model: ${provider === 'gemini' ? process.env.GEMINI_MODEL || 'gemini-4-argon' : `${provider} (offline stand-in)`}`);
 }
